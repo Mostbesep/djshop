@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'treebeard',
 
+
     'channels',
 
      'djshop.auths.users',
