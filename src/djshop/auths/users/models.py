@@ -36,7 +36,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     postcode = models.CharField(max_length=12, blank=True)
     email = models.EmailField(_("email address"), blank=True)
     verified_email  = models.BooleanField(default=False)
-    phone = models.CharField(_('phone'),max_length=10,blank=True)
+    phone = models.CharField(_('phone'),max_length=11,blank=True)
     verified_phone  = models.BooleanField(default=False)
 
     is_staff = models.BooleanField(

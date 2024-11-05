@@ -10,4 +10,5 @@ router.register('productClasses',ProductClassViewSet , basename='ProductClass')
 router.register('products',ProductViewSet , basename='Products')
 
 
+
 urlpatterns = [] + router.urls

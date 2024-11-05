@@ -4,6 +4,8 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 
+from djshop.auths.users.models import User
+
 
 class AdminLoginSerializer(AuthTokenSerializer):
     def validate(self, attrs):
@@ -26,5 +28,12 @@ class AdminLoginSerializer(AuthTokenSerializer):
 
         attrs['user'] = user
         return attrs
+
+
+
+class UserManagementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
 
 
