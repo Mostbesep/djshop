@@ -30,8 +30,6 @@ services:
     image: redis:latest
     ports:
       - "6379:6379"
-    volumes:
-      - djshop-data:/var/lib/redis
   
 volumes:
   djshop-data:
