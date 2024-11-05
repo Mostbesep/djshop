@@ -1,4 +1,6 @@
 from django.db import models
+
+
 from treebeard.mp_tree import MP_Node
 
 from djshop.apps.catalog.managers import CategoryQuerySet
@@ -54,11 +56,13 @@ class ProductClass(models.Model):
     track_stock = models.BooleanField(default=True)
     require_shipping = models.BooleanField(default=True)
 
-    options = models.ManyToManyField('Option', blank=True)
+    options = models.ManyToManyField('Option', blank=True, related_name='product_classes')
 
     @property
     def has_attribute(self):
         return self.attributes.exists()
+
+
 
     def __str__(self):
         return self.title
@@ -103,6 +107,8 @@ class Option(models.Model):
     option_group = models.ForeignKey(OptionGroup, on_delete=models.PROTECT, null=True, blank=True)
     required = models.BooleanField(default=False)
 
+
+
     def __str__(self):
         return self.title
 
@@ -121,7 +127,7 @@ class Product(AuditableModel):
     parent = models.ForeignKey("self", related_name="children", on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=128, null=True, blank=True)
     upc = UpperCaseCharField(max_length=24, unique=True, null=True, blank=True)
-    is_public = models.BooleanField(default=True)
+    is_public = models.BooleanField(default=False)
     meta_title = models.CharField(max_length=128, null=True, blank=True)
     meta_description = models.TextField(null=True, blank=True)
 
@@ -139,6 +145,23 @@ class Product(AuditableModel):
             return self.images.first()
         else:
             return None
+
+    @property
+    def category(self):
+        return self.categories.first().title
+
+    @property
+    def product_class_title(self):
+        return self.product_class.title
+
+    @property
+    def product_class_description(self):
+        return self.product_class.description
+
+
+    @property
+    def required_attributes(self):
+        return self.product_class.attributes.filter(required=True).all()
 
     class Meta:
         verbose_name = "Product"

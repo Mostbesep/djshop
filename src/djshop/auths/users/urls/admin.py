@@ -5,5 +5,5 @@ from djshop.auths.users.views.admin import AdminLoginView
 
 router = SimpleRouter()
 urlpatterns = [
-                  path('login/', AdminLoginView.as_view())
+                  path('login/', AdminLoginView.as_view()),
               ] + router.urls

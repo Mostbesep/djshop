@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from django.template.context_processors import request
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 from rest_framework.authtoken.serializers import AuthTokenSerializer
@@ -25,3 +26,5 @@ class AdminLoginSerializer(AuthTokenSerializer):
 
         attrs['user'] = user
         return attrs
+
+

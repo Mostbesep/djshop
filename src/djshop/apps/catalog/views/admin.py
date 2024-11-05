@@ -1,9 +1,11 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.exceptions import NotAcceptable
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from djshop.apps.catalog.models import Category
+from djshop.apps.catalog.models import Category, Option, ProductClass, Product, ProductRecommendation
 from djshop.apps.catalog.serializers.admin import CreateCategoryNodeSerializer, CategoryTreeSerializer, \
-    CategoryNodeSerializer, CategoryModificationSerializer
+    CategoryNodeSerializer, CategoryModificationSerializer, ProductSerializer, ProductClassSerializer
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -31,3 +33,25 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
             case _:
                 raise NotAcceptable()
+
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+
+    def get_queryset(self):
+        return Product.objects.all()
+
+    def get_serializer_class(self):
+        return ProductSerializer
+
+
+
+class ProductClassViewSet(viewsets.ModelViewSet):
+
+    def get_queryset(self):
+        return ProductClass.objects.all()
+
+    def get_serializer_class(self):
+        return ProductClassSerializer
+
+

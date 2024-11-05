@@ -4,7 +4,7 @@ from treebeard.admin import TreeAdmin
 from treebeard.forms import movenodeform_factory
 
 from djshop.apps.catalog.models import Category, ProductClass, Option, ProductAttribute, ProductRecommendation, Product, \
-    ProductAttributeValue, ProductImage
+    ProductAttributeValue, ProductImage, OptionGroupValue, OptionGroup
 
 
 # Register your models here.
@@ -12,12 +12,20 @@ class CategoryAdmin(TreeAdmin):
     form = movenodeform_factory(Category)
 
 
+
+
 admin.site.register(Option)
+admin.site.register(OptionGroup)
+admin.site.register(OptionGroupValue)
+admin.site.register(ProductAttribute)
+admin.site.register(ProductAttributeValue)
+
 
 
 class ProductAttributeInline(admin.StackedInline):
     model = ProductAttribute
-    extra = 2
+    extra = 0
+
 
 
 class AttributeCountFilter(admin.SimpleListFilter):
@@ -54,22 +62,23 @@ class ProductClassAdmin(admin.ModelAdmin):
 
 class ProductRecommendationInline(admin.StackedInline):
     model = ProductRecommendation
-    extra = 2
+    extra = 0
     fk_name = 'primary'
 
 
 class ProductCategoryInline(admin.StackedInline):
     model = Product.categories.through
-    extra = 2
+    extra = 0
 
 
 class ProductAttributeValueInline(admin.TabularInline):
     model = ProductAttributeValue
-    extra = 2
+    extra = 0
+
 
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
-    extra = 2
+    extra = 0
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug',)

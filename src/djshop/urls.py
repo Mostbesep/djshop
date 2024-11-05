@@ -25,7 +25,8 @@ admin_urls = [
     path('api/admin/users/',
          include(('djshop.auths.users.urls.admin', 'djshop.auths.users'), namespace='users-admin')),
 
-    path('api/admin/catalog/', include(('djshop.apps.catalog.urls.admin', 'djshop.apps.catalog'), namespace='catalog-admin'))
+    path('api/admin/catalog/',
+         include(('djshop.apps.catalog.urls.admin', 'djshop.apps.catalog'), namespace='catalog-admin'))
 ]
 
 front_urls =[

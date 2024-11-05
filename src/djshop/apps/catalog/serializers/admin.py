@@ -3,7 +3,8 @@ from drf_spectacular.utils import extend_schema_field
 from rest_framework import serializers
 from rest_framework.generics import get_object_or_404
 
-from djshop.apps.catalog.models import Category
+from djshop.apps.catalog.models import (Category, Option, Product, ProductClass,ProductAttribute,
+                                        ProductAttributeValue,ProductRecommendation,OptionGroupValue,)
 
 
 class CreateCategoryNodeSerializer(serializers.ModelSerializer):
@@ -47,3 +48,24 @@ class CategoryModificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ('id','title', 'description', 'is_public',)
+
+
+
+class ProductClassSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductClass
+        fields = '__all__'
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+
+
+
+
+
+
+
